@@ -24,4 +24,8 @@ export class ApiService {
   public delete(endpoint: string):Observable<any> {
     return this.http.delete<any>(this.API_URL + endpoint);
   }
+
+  public getOne(endpoint: string, id: number):Observable<any> {
+    return this.http.get<any>(this.API_URL + endpoint + '/' + id);
+  }
 }

@@ -22,6 +22,7 @@ import { ConfirmDeleteDialogComponent } from '../components/confirm-delete-dialo
 export class PrestamosComponent {
   prestamos: MatTableDataSource<Prestamo> = new MatTableDataSource<Prestamo>([]);
   clientes: Cliente[] = [];
+  id: number = 0;
 
   constructor(private api: ApiService, public dialog: MatDialog) {}
 
@@ -55,14 +56,32 @@ export class PrestamosComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        //AGREGAMOS EL DUE_DATE 15 SEMANAS DESPUES DE LA FECHA DE INICIO
         let fecha = new Date(result.date);
-        fecha.setDate(fecha.getDate() + 15*7);
+        fecha.setDate(fecha.getDate() + 15 * 7);
         result.due_date = fecha.toISOString().split('T')[0];
 
-        this.api.post('prestamos', result,).subscribe((response: HttpResponse<Prestamo>) => {
-          //ejecutamos llenarPrestamos para actualizar la tabla
+        this.api.post('prestamos', result).subscribe((response: any) => {
+          this.id = response.id;
           this.llenaPrestamos();
+          console.log(this.id);
+
+          // Crear los 15 pagos semanales
+          const weeklyAmount = result.amount / 15;
+          const startDate = new Date(result.date);
+
+          for (let i = 0; i < 15; i++) {
+            const paymentDate = new Date(startDate.getTime() + i * 7 * 24 * 60 * 60 * 1000);
+            const weeklyPayment = {
+              prestamo_id: this.id,
+              week: i + 1,
+              amount: weeklyAmount,
+              date: paymentDate.toISOString().split('T')[0],
+            };
+
+            this.api.post('pagos', weeklyPayment).subscribe((paymentResponse: any) => {
+              console.log('Pago creado:', paymentResponse);
+            });
+          }
         });
       }
     });
@@ -74,7 +93,11 @@ export class PrestamosComponent {
   }
 
   //funcion para rediccionar a la pagina de pagos
-  redireccionarPagos(prestamo: Prestamo) {
+  redireccionarPagos(prestamo: Prestamo){
     window.location.href = '/pagos/' + prestamo.id;
-  }
+}
+
+//funcion para crear los 15 pagos de un prestamo
+
+
 }

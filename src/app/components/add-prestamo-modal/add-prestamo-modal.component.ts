@@ -10,10 +10,12 @@ import { Cliente } from '../../cliente.model';
 import { Inject } from '@angular/core';
 import { MatSelect } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
+import { MatDatepickerModule } from '@angular/material/datepicker';  // Para el selector de fecha
+import { MatNativeDateModule } from '@angular/material/core'; 
 
 @Component({
   selector: 'app-add-prestamo-modal',
-  imports: [ FormsModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatDialogModule,MatOption,MatSelect,MatOptionModule,CommonModule ],
+  imports: [ FormsModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatDialogModule,MatOption,MatSelect,MatOptionModule,CommonModule,MatDatepickerModule,MatNativeDateModule ],
   templateUrl: './add-prestamo-modal.component.html',
   styleUrl: './add-prestamo-modal.component.css'
 })
