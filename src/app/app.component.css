@@ -1,0 +1,21 @@
+.navbar {
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  mat-toolbar + * {
+    padding-top: 64px; /* Altura del navbar */
+  }
+  

@@ -1,0 +1,45 @@
+<div class="container">
+    <h1>Lista de Clientes</h1>
+  
+    <table mat-table [dataSource]="clientes" class="mat-elevation-z8">
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let cliente">{{ cliente.id }}</td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let cliente">{{ cliente.name }}</td>
+        </ng-container>
+      
+        <!-- Lastname Column -->
+        <ng-container matColumnDef="lastname">
+          <th mat-header-cell *matHeaderCellDef>Apellido</th>
+          <td mat-cell *matCellDef="let cliente">{{ cliente.lastname }}</td>
+        </ng-container>
+      
+        <!-- Address Column -->
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef>Dirección</th>
+          <td mat-cell *matCellDef="let cliente">{{ cliente.address }}</td>
+        </ng-container>
+      
+        <!-- Delete Button Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let cliente">
+            <button mat-button color="warn" (click)="confirmDelete(cliente)">Eliminar</button>
+          </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="['id', 'name', 'lastname', 'address', 'actions']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'lastname', 'address', 'actions']"></tr>
+      </table>
+      
+      <button mat-raised-button color="primary" (click)="agregarCliente()">Agregar Cliente</button>
+      
+      
+  </div>
+  
