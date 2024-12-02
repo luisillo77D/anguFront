@@ -1,8 +1,8 @@
 <h2 mat-dialog-title>¿Estás seguro?</h2>
 <mat-dialog-content>
-  <p>¿Deseas eliminar este cliente?</p>
+  <p>{{message}}</p>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button (click)="onCancel()">Cancelar</button>
-  <button mat-button color="warn" (click)="onConfirm()">Eliminar</button>
+  <button mat-button color="warn" (click)="onConfirm()">{{status}}</button>
 </mat-dialog-actions>

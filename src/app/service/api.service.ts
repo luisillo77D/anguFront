@@ -28,4 +28,8 @@ export class ApiService {
   public getOne(endpoint: string, id: number):Observable<any> {
     return this.http.get<any>(this.API_URL + endpoint + '/' + id);
   }
+
+  public putPagar( id: number):Observable<any> {
+    return this.http.put<any>(this.API_URL + 'pagos/status/' + id, {});
+  }
 }
