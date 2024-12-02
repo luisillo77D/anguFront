@@ -1,0 +1,28 @@
+<h2>Nuevo Prestamo</h2>
+
+<mat-dialog-content>
+  <form>
+    <mat-form-field appearance="fill">
+      <mat-label>Cliente</mat-label>
+      <mat-select [(ngModel)]="prestamo.cliente_id" name="cliente" required>
+        <mat-option *ngFor="let cliente of clientes" [value]="cliente.id">
+          {{cliente.name}} {{cliente.lastname}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Monto</mat-label>
+      <input matInput [(ngModel)]="prestamo.amount" name="monto" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha</mat-label>
+      <input matInput [(ngModel)]="prestamo.date" name="fecha" required />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancelar()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="guardar()">Guardar</button>
+</mat-dialog-actions>

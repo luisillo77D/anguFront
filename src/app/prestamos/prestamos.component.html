@@ -1,1 +1,46 @@
-<p>prestamos works!</p>
+<div class="container">
+
+    <h1>
+        lista de prestamos
+    </h1>
+
+    <table mat-table [dataSource]="prestamos" class="mat-elevation-z8">
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let prestamo">{{ prestamo.id }}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="monto">
+            <th mat-header-cell *matHeaderCellDef>Monto</th>
+            <td mat-cell *matCellDef="let prestamo">{{ prestamo.amount }}</td>
+        </ng-container>
+
+        <!-- Lastname Column -->
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>fecha<th>
+            <td mat-cell *matCellDef="let prestamo">{{ prestamo.date }}</td>
+        </ng-container>
+
+        <!-- Address Column -->
+        <ng-container matColumnDef="cliente">
+            <th mat-header-cell *matHeaderCellDef>Cliente</th>
+            <td mat-cell *matCellDef="let prestamo">{{ prestamo.cliente.name }}</td>
+        </ng-container>
+
+        <!-- Delete Button Column -->
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let prestamo">
+                <button mat-button color="primary" (click)="redireccionarPagos(prestamo)">Ver</button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['id', 'monto', 'date', 'cliente', 'actions']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['id', 'monto', 'date', 'cliente', 'actions']"></tr>
+    </table>
+
+    <button mat-raised-button color="primary" (click)="agregarPrestamo()">Agregar Prestamo</button>
+</div>
